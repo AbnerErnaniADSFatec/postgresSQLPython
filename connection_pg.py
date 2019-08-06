@@ -27,12 +27,22 @@ class Connection_pg:
             print("Conexao criada com sucesso!")
         except:
             print("Impossivel criar conexao!")
-        
+    
+    def readFileSQL(self, arquivo, mapping):
+        try:
+            sql_command = " ".join(open(arquivo + '.sql', 'r').read().split('\n'))
+            data_frame = pd.read_sql(sql_command.format(**mapping), self.connection)
+            print("Leitura feita com sucesso : " + sql_command)
+            return data_frame
+        except:
+            print("Impossivel ler o arquivo " + arquivo + ".sql")
+            return None
+
     def load_data(self, sql_command):
         try:
-            data = pd.read_sql(sql_command, self.connection)# self.connection)
+            data_frame = pd.read_sql(sql_command, self.connection)
             print("Leitura feita com sucesso : " + sql_command)
-            return data
+            return data_frame
         except:
             print("Impossivel ler : " + sql_command)
             return None

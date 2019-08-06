@@ -1,6 +1,6 @@
 ## Python 3.5.2
 
-your code => from connection_pg import Connection_pg
+your code => from connection_pg import Connection_pg and read files SQL with Python
 
 ## Install psycopg2
 
