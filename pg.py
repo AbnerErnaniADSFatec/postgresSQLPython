@@ -1,5 +1,4 @@
 pgHost = "127.0.0.1"
-pgPort = "SGBDPort"
-pgDataBase = "DataBaseNane"
-pgUser = "User"
-pgPassWord = "SecretPassword"
+pgPort = "5432"
+pgUser = "postgres"
+pgPassWord = "postgres"

@@ -7,12 +7,12 @@ import pandas.io.sql as psql
 from sqlalchemy import create_engine
 
 class Connection_pg:
-    def __init__(self):
+    def __init__(self, pgDataBase):
         try:
             self.string_connection = (
                 "host = " + creds.pgHost + 
                 " port = " + creds.pgPort + 
-                " dbname = " + creds.pgDataBase + 
+                " dbname = " + pgDataBase + 
                 " user = " + creds.pgUser + 
                 " password = " + creds.pgPassWord
             )
@@ -22,7 +22,7 @@ class Connection_pg:
                 'postgresql+psycopg2://' +
                 creds.pgUser + ':' + creds.pgPassWord +
                 '@' + creds.pgHost + ':' + creds.pgPort +
-                '/' + creds.pgDataBase
+                '/' + pgDataBase
             )
             print("Conexao criada com sucesso!")
         except:
@@ -30,8 +30,8 @@ class Connection_pg:
     
     def readFileSQL(self, arquivo, mapping):
         try:
-            sql_command = " ".join(open(arquivo + '.sql', 'r').read().split('\n'))
-            data_frame = pd.read_sql(sql_command.format(**mapping), self.connection)
+            sql_command = (" ".join(open(arquivo + '.sql', 'r').read().split('\n'))).format(**mapping)
+            data_frame = pd.read_sql(sql_command, self.connection)
             print("Leitura feita com sucesso : " + sql_command)
             return data_frame
         except:
