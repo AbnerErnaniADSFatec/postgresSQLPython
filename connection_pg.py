@@ -62,3 +62,8 @@ class Connection_pg:
         
     def getCursor(self):
         return self.cursor
+        
+    def closeAll(self):
+        self.getConn().close()
+        self.getCursor().close()
+        print("Conexão finalizada!")
